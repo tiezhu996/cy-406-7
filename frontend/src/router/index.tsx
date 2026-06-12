@@ -1,5 +1,6 @@
 import { Layout, Menu, Typography } from '@arco-design/web-react';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { GlobalSearch } from '../components/common';
 import { ClauseList } from '../pages/ClauseList';
 import { InstanceEditor } from '../pages/InstanceEditor';
 import { TemplateEditor } from '../pages/TemplateEditor';
@@ -31,7 +32,10 @@ export function AppRouter() {
       </Layout.Sider>
       <Layout className="app-main">
         <Layout.Header className="app-header">
-          <Typography.Text type="secondary">本地 IndexedDB 持久化 · 无需后端</Typography.Text>
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+            <GlobalSearch />
+          </div>
+          <Typography.Text type="secondary" style={{ flexShrink: 0 }}>本地 IndexedDB 持久化 · 无需后端</Typography.Text>
         </Layout.Header>
         <Layout.Content className="app-content">
           <Routes>
