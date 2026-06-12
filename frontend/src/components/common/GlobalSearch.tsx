@@ -110,7 +110,7 @@ export function GlobalSearch() {
         title: c.title,
         excerpt: getExcerpt(c.contentHtml, keyword),
         categoryLabel: CLAUSE_CATEGORY_LABELS[c.category],
-        url: `/clauses`
+        url: `/clauses/${c.id}`
       }));
 
     const instanceResults: SearchResult[] = instances

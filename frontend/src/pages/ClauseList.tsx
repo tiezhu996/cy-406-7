@@ -1,6 +1,7 @@
 import { Button, Input, Message, Space, Typography } from '@arco-design/web-react';
 import { IconPlus } from '@arco-design/web-react/icon';
 import { useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { CategoryFilter, ClauseCard } from '../components/common';
 import { ClauseEditor } from '../components/editor/ClauseEditor';
 import { useClauseStore } from '../stores/clause';
@@ -8,6 +9,7 @@ import { Clause, ClauseDraft } from '../types/clause';
 import { CLAUSE_CATEGORY_LABELS, ClauseCategory } from '../types/enums';
 
 export function ClauseList() {
+  const { id: clauseIdFromRoute } = useParams<{ id: string }>();
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState('all');
   const [editorVisible, setEditorVisible] = useState(false);
@@ -17,6 +19,16 @@ export function ClauseList() {
   useEffect(() => {
     void loadClauses();
   }, [loadClauses]);
+
+  useEffect(() => {
+    if (clauseIdFromRoute && clauses.length > 0 && !editorVisible) {
+      const clause = clauses.find((c) => c.id === clauseIdFromRoute);
+      if (clause) {
+        setEditingClause(clause);
+        setEditorVisible(true);
+      }
+    }
+  }, [clauseIdFromRoute, clauses, editorVisible]);
 
   const categoryOptions = Object.values(ClauseCategory).map((value) => ({
     value,

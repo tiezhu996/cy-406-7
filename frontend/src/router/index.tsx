@@ -45,6 +45,7 @@ export function AppRouter() {
             <Route path="/instances/:id" element={<InstanceEditor />} />
             <Route path="/instances/:id/versions" element={<VersionCompare />} />
             <Route path="/clauses" element={<ClauseList />} />
+            <Route path="/clauses/:id" element={<ClauseList />} />
             <Route path="*" element={<Navigate to="/templates" replace />} />
           </Routes>
         </Layout.Content>
